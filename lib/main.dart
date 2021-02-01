@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_week_7/secondPage.dart';
+import 'package:flutter_week_7/thirdpage.dart';
 
 void main() => runApp(MyHome());
 
@@ -10,6 +12,9 @@ class MyHome extends StatelessWidget {
       title: appTitle,
       initialRoute: '/',
       routes: {
+        // '/': (context) => MyApp(),
+        '/second': (context) => SecondPage(),
+        '/thrid': (context) => ThirdPage(),
         //      '/homepage': (context) => Homepage(),
       },
       home: MyApp(title: appTitle),
@@ -25,6 +30,31 @@ class MyApp extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Flutter Demo'),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text('SECOND PAGE'),
+              onTap: () {
+                Navigator.pushNamed(context, '/second');
+              },
+            ),
+            ListTile(
+              title: Text('THRID PAGE'),
+              onTap: () {
+                Navigator.pushNamed(context, '/thrid');
+              },
+            )
+          ],
+        ),
       ),
       body: Center(
           child: ListView(children: <Widget>[
