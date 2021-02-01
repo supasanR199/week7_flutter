@@ -4,6 +4,7 @@ import 'package:flutter_week_7/thirdpage.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() => runApp(MyHome());
 
@@ -79,12 +80,14 @@ class MyRadio extends StatefulWidget {
 }
 
 class _MyRadioState extends State<MyRadio> {
+  File _avatar;
   final _format = DateFormat('dd/MM/yyyy');
   dynamic route;
   bool checkboxValueA = true;
   bool checkboxValueB = true;
   List<String> provices = ['', 'BKK', 'Pathumthani', 'Outbound'];
   dynamic provice = '';
+  final picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
@@ -106,6 +109,14 @@ class _MyRadioState extends State<MyRadio> {
             ]),
             buildSelectField(),
             buildDateField(),
+            _avatar == null
+                ? RaisedButton(
+                    onPressed: () {
+                      onChooseImage();
+                    },
+                    child: Text('Choose Avatar'),
+                  )
+                : Image.file(_avatar)
           ]),
     );
   }
@@ -193,5 +204,16 @@ class _MyRadioState extends State<MyRadio> {
             lastDate: DateTime(2100));
       },
     );
+  }
+
+  onChooseImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    setState(() {
+      if (pickedFile != null) {
+        _avatar = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
   }
 }
