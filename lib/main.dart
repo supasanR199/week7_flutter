@@ -43,7 +43,8 @@ class MyRadio extends StatefulWidget {
 
 class _MyRadioState extends State<MyRadio> {
   dynamic route;
-
+  bool checkboxValueA = true;
+  bool checkboxValueB = true;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,33 +52,67 @@ class _MyRadioState extends State<MyRadio> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Row(children: [
-              Radio(
-                value: 'M',
-                groupValue: route,
-                onChanged: (value) {
-                  setState(() {
-                    route = value;
-                  });
-                },
-              ),
-              Text('Male'),
-              Radio(
-                value: 'F',
-                groupValue: route,
-                onChanged: (value) {
-                  // _handleTapboxChanged(value);
-                  setState(() {
-                    route = value;
-                  });
-                },
-              ),
-              Text('Female'),
-            ]),
+            buildRadioButton(),
             Row(children: [
               Text('$route'),
             ]),
+            buildCheckbox(),
+            Row(children: [
+              Text('$checkboxValueA'),
+            ]),
+            Row(children: [
+              Text('$checkboxValueB'),
+            ]),
           ]),
     );
+  }
+
+  Row buildCheckbox() {
+    return Row(children: [
+      Checkbox(
+        value: checkboxValueA,
+        onChanged: (bool value) {
+          setState(() {
+            checkboxValueA = value;
+          });
+        },
+      ),
+      Text('CheckBox A'),
+      Checkbox(
+        value: checkboxValueB,
+        onChanged: (bool value) {
+          setState(() {
+            checkboxValueB = value;
+          });
+        },
+      ),
+      Text('CheckBox B'),
+    ]);
+  }
+
+  Row buildRadioButton() {
+    return Row(children: [
+      Radio(
+        value: 1,
+        groupValue: route,
+        onChanged: (value) {
+          setState(() {
+            route = value;
+          });
+        },
+      ),
+      Text('Round Trip'),
+      Radio(
+        value: 0,
+        groupValue: route,
+        onChanged: (value) {
+          // _handleTapboxChanged(value);
+          setState(() {
+            route = value;
+          });
+        },
+      ),
+      Text('One way'),
+    ]);
   }
 }
