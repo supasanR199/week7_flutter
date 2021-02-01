@@ -45,7 +45,7 @@ class _MyRadioState extends State<MyRadio> {
   dynamic route;
   bool checkboxValueA = true;
   bool checkboxValueB = true;
-  List<String> provices = ['', 'BKK', 'Outbound'];
+  List<String> provices = ['', 'BKK', 'Pathumthani', 'Outbound'];
   dynamic provice = '';
 
   @override
@@ -124,21 +124,19 @@ class _MyRadioState extends State<MyRadio> {
     return InputDecorator(
       decoration: InputDecoration(labelText: 'Province'),
       child: DropdownButtonHideUnderline(
-        child: DropdownButton(
+        child: DropdownButton<String>(
+          items: provices.map((String dropDownStringItem) {
+            return DropdownMenuItem<String>(
+              value: dropDownStringItem,
+              child: Text(dropDownStringItem),
+            );
+          }).toList(),
           value: provice,
-          onChanged: (value) {
+          onChanged: (String newValueSelected) {
             setState(() {
-              provice = value;
+              provice = newValueSelected;
             });
           },
-          items: provices
-              .map(
-                (value) => DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                ),
-              )
-              .toList(),
         ),
       ),
     );
