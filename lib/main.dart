@@ -45,6 +45,9 @@ class _MyRadioState extends State<MyRadio> {
   dynamic route;
   bool checkboxValueA = true;
   bool checkboxValueB = true;
+  List<String> provices = ['', 'BKK', 'Outbound'];
+  dynamic provice = '';
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -63,6 +66,7 @@ class _MyRadioState extends State<MyRadio> {
             Row(children: [
               Text('$checkboxValueB'),
             ]),
+            buildSelectField(),
           ]),
     );
   }
@@ -93,7 +97,7 @@ class _MyRadioState extends State<MyRadio> {
   Row buildRadioButton() {
     return Row(children: [
       Radio(
-        value: 1,
+        value: 'M',
         groupValue: route,
         onChanged: (value) {
           setState(() {
@@ -101,9 +105,9 @@ class _MyRadioState extends State<MyRadio> {
           });
         },
       ),
-      Text('Round Trip'),
+      Text('Male'),
       Radio(
-        value: 0,
+        value: 'F',
         groupValue: route,
         onChanged: (value) {
           // _handleTapboxChanged(value);
@@ -112,7 +116,31 @@ class _MyRadioState extends State<MyRadio> {
           });
         },
       ),
-      Text('One way'),
+      Text('Female'),
     ]);
+  }
+
+  InputDecorator buildSelectField() {
+    return InputDecorator(
+      decoration: InputDecoration(labelText: 'Province'),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton(
+          value: provice,
+          onChanged: (value) {
+            setState(() {
+              provice = value;
+            });
+          },
+          items: provices
+              .map(
+                (value) => DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                ),
+              )
+              .toList(),
+        ),
+      ),
+    );
   }
 }
