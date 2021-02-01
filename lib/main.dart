@@ -35,10 +35,14 @@ class MyApp extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              child: Text('Drawer Header'),
-              decoration: BoxDecoration(
-                color: Colors.blue,
+            UserAccountsDrawerHeader(
+              accountName: Text('Supasan'),
+              accountEmail: Text('supasan.garry@gmail.com'),
+              currentAccountPicture: CircleAvatar(
+                child: FlutterLogo(
+                  size: 42.8,
+                ),
+                backgroundColor: Colors.red[50],
               ),
             ),
             ListTile(
