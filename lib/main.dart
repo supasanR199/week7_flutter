@@ -53,7 +53,7 @@ class _MyRadioState extends State<MyRadio> {
           children: <Widget>[
             Row(children: [
               Radio(
-                value: 1,
+                value: 'M',
                 groupValue: route,
                 onChanged: (value) {
                   setState(() {
@@ -61,9 +61,9 @@ class _MyRadioState extends State<MyRadio> {
                   });
                 },
               ),
-              Text('Round Trip'),
+              Text('Male'),
               Radio(
-                value: 0,
+                value: 'F',
                 groupValue: route,
                 onChanged: (value) {
                   // _handleTapboxChanged(value);
@@ -72,7 +72,7 @@ class _MyRadioState extends State<MyRadio> {
                   });
                 },
               ),
-              Text('One way'),
+              Text('Female'),
             ]),
             Row(children: [
               Text('$route'),
