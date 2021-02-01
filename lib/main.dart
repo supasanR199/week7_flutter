@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_week_7/secondPage.dart';
 import 'package:flutter_week_7/thirdpage.dart';
+import 'dart:io';
+import 'package:intl/intl.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 void main() => runApp(MyHome());
 
@@ -76,6 +79,7 @@ class MyRadio extends StatefulWidget {
 }
 
 class _MyRadioState extends State<MyRadio> {
+  final _format = DateFormat('dd/MM/yyyy');
   dynamic route;
   bool checkboxValueA = true;
   bool checkboxValueB = true;
@@ -101,6 +105,7 @@ class _MyRadioState extends State<MyRadio> {
               Text('$checkboxValueB'),
             ]),
             buildSelectField(),
+            buildDateField(),
           ]),
     );
   }
@@ -173,6 +178,20 @@ class _MyRadioState extends State<MyRadio> {
           },
         ),
       ),
+    );
+  }
+
+  DateTimeField buildDateField() {
+    return DateTimeField(
+      decoration: InputDecoration(labelText: 'Birth Date'),
+      format: _format,
+      onShowPicker: (context, currentValue) {
+        return showDatePicker(
+            context: context,
+            firstDate: DateTime(1900),
+            initialDate: currentValue ?? DateTime.now(),
+            lastDate: DateTime(2100));
+      },
     );
   }
 }
